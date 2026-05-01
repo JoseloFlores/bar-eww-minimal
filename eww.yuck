@@ -1,0 +1,122 @@
+(defvar show_calendar false)
+(defpoll updates_count :interval "15m" "~/.config/eww/scripts/check_updates.sh")
+(defpoll clock_time :interval "1s" "date +'%H:%M'")
+(defpoll clock_date :interval "60s" "date +'%d/%m'")
+(defpoll battery :interval "10s" "~/.config/eww/scripts/battery.sh capacity")
+(defpoll volume :interval "0.1s" "~/.config/eww/scripts/volume_get.sh")
+
+(deflisten workspaces :initial "[]" "~/.config/eww/scripts/workspaces.sh")
+
+(defwidget workspace_widget []
+  (box :class "workspaces" :orientation "h" :spacing 2
+    (for ws in workspaces
+      (button :class {ws.id == 1 ? "active" : "default"}
+              :onclick "hyprctl dispatch workspace ${ws.id}"
+              (label :text {ws.id})))))
+
+(defwidget updates_widget []
+  (eventbox :class {updates_count > 0 ? "updates-pending" : "updates-none"}
+            :tooltip "Updates: ${updates_count}"
+            :onclick "foot sh -c 'sudo apt update && sudo apt upgrade -y && eww update updates_count=$(~/.config/eww/scripts/check_updates.sh); echo Actualizado; read'"
+    (label :text "󰮯 ${updates_count}")))
+
+(defwidget clock_widget []
+  (eventbox :class "clock"
+            :tooltip "Date & Time"
+            :onclick "eww open --toggle calendar_win"
+    (label :text " ${clock_time}  ${clock_date}")))
+
+(defwidget battery_widget []
+  (box :class "battery" 
+       :tooltip {EWW_BATTERY == "" ? "No Battery" : "${EWW_BATTERY.BAT1.status}: ${EWW_BATTERY.BAT1.capacity}%"}
+       (label :text "${battery}")))
+
+(defwidget volume_widget []
+  (eventbox :class "volume"
+            :tooltip "Volume: ${volume}"
+            :onscroll "~/.config/eww/scripts/volume_control.sh {}"
+            :onclick "pavucontrol &"
+    (label :text "${volume}")))
+
+(defpoll wifi :interval "1s" "~/.config/eww/scripts/wifi.sh")
+(defpoll bluetooth :interval "1s" "~/.config/eww/scripts/bluetooth.sh")
+
+(defwidget network_widget []
+  (eventbox :class "network"
+            :tooltip "WiFi: ${wifi}"
+            :onclick "adwaita-network &"
+    (label :text " ${wifi}")))
+
+(defwidget bluetooth_widget []
+  (eventbox :class "bluetooth"
+            :tooltip "Bluetooth: ${bluetooth}"
+            :onclick "blueman-manager &"
+    (label :text " ${bluetooth}")))
+
+(defvar show_powermenu false)
+
+(defwidget powermenu_widget []
+  (eventbox :class "powermenu"
+            :onhover "${EWW_CMD} update show_powermenu=true"
+            :onhoverlost "${EWW_CMD} update show_powermenu=false"
+    (box :orientation "h" :space-evenly false
+      (revealer :transition "slideleft"
+                :reveal show_powermenu
+                :duration "300ms"
+        (box :orientation "h" :spacing 0
+          (button :class "btn-reboot" :onclick "~/.config/hypr/confirm_power.sh '¿Reiniciar?' 'reboot'" "󰜉")
+          (button :class "btn-lock" :onclick "loginctl lock-session" "󰌾")
+          (button :class "btn-quit" :onclick "~/.config/hypr/confirm_power.sh '¿Salir?' 'hyprctl dispatch exit'" "󰗼")))
+      (button :class "btn-power" :onclick "~/.config/hypr/confirm_power.sh '¿Apagar?' 'shutdown now'" "⏻"))))
+
+
+(defwidget bar []
+  (box :class "bar" :orientation "h" :space-evenly false :spacing 0
+    (box :class "left" :orientation "h" :halign "start" :spacing 0
+      (workspace_widget))
+    (box :hexpand true)
+    (box :class "right" :orientation "h" :halign "end" :spacing 0
+      (updates_widget)
+      (network_widget)
+      (bluetooth_widget)
+      (volume_widget)
+      (brightness_widget)
+      (battery_widget)
+      (clock_widget)
+      (powermenu_widget))))
+
+
+(defpoll brightness :interval "0.1s" "~/.config/eww/scripts/brightness_get.sh")
+
+(defwidget brightness_widget []
+  (eventbox :class "brightness"
+            :tooltip "Brightness: ${brightness}%"
+            :onscroll "~/.config/eww/scripts/brightness_control.sh {}"
+    (label :text "󰃠 ${brightness}%")))
+
+(defwidget bar []
+  (box :class "bar" :orientation "h" :space-evenly false :spacing 9
+    (box :class "left" :orientation "h" :halign "start" :space-evenly false :spacing 9
+      (workspace_widget))
+    (box :hexpand true)
+    (box :class "right" :orientation "h" :halign "end" :space-evenly false :spacing 8
+      (network_widget)
+      (bluetooth_widget)
+      (volume_widget)
+      (brightness_widget)
+      (battery_widget)
+      (clock_widget)
+      (updates_widget)
+      (powermenu_widget))))
+
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :x "0%" :y "0%" :width "100%" :height "30px" :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  (bar))
+
+(defwindow calendar_win
+  :monitor 0
+  :geometry (geometry :x "0" :y "35px" :width "250px" :height "200px" :anchor "top right")
+  (calendar :class "calendar"))

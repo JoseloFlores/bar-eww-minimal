@@ -1,0 +1,1 @@
+bluetoothctl devices | awk '{print $2}' | while read -r dev; do info=$(bluetoothctl info "$dev"); if echo "$info" | grep -q 'Connected: yes'; then echo "$info" | grep 'Name:' | cut -d' ' -f2-; break; fi; done
