@@ -1,3 +1,20 @@
+// ==========================================
+// CAMBIA TU TEMA AQUÍ:
+// ==========================================
+// Simplemente cambia el nombre del archivo abajo (ej: nord, dracula, rosepine)
+@import "themes/tokyonight.scss";
+// ==========================================
+
+// Temas Disponibles 
+//   - catppuccin
+//   - dracula
+//   - everforest
+//   - gruvbox-dark
+//   - gruvbox-light
+//   - nord
+//   - rosepine
+//   - tokyonight
+
 * {
   all: unset;
   font-family: "MesloLGS Nerd Font", "Symbols Nerd Font", sans-serif;
@@ -5,20 +22,20 @@
 }
 
 .bar {
-  background-color: #1a1b26;
-  color: #c0caf5;
+  background-color: $base00;
+  color: $base05;
   padding: 0 1px;
 }
 
 .workspaces button {
   padding: 1 2px;
   margin: 0;
-  color: #a9b1d6;
+  color: $base04;
 }
 
 .workspaces button.active {
-  background-color: #24283b;
-  color: #7aa2f7;
+  background-color: $base01;
+  color: $accent4;
 }
 
 .network, .bluetooth, .volume, .brightness, .battery, .updates-none, .updates-pending, .clock, .powermenu-container {
@@ -28,7 +45,7 @@
 }
 
 .network:hover, .bluetooth:hover, .volume:hover, .brightness:hover, .battery:hover, .updates-none:hover, .updates-pending:hover, .clock:hover, .powermenu-container:hover {
-  background-color: #24283b;
+  background-color: $base01;
   border-radius: 10px;
   margin: 0 4px;
 }
@@ -37,39 +54,39 @@
   padding: 0 4px;
 }
 
-.btn-toggle { color: #a9b1d6; }
+.btn-toggle { color: $base04; }
 
-.network { color: #7dcfff; }
-.bluetooth { color: #7aa2f7; }
-.volume { color: #e0af68; }
-.brightness { color: #c0caf5; }
-.battery { color: #9ece6a; }
-.updates-none { color: #c0caf5; }
-.updates-pending { color: #f7768e; }
-.clock { color: #bb9af7; }
+.network { color: $accent6; }
+.bluetooth { color: $accent4; }
+.volume { color: $accent3; }
+.brightness { color: $base05; }
+.battery { color: $accent2; }
+.updates-none { color: $base05; }
+.updates-pending { color: $accent1; }
+.clock { color: $accent5; }
 
 .calendar {
-  background-color: #1a1b26;
-  color: #c0caf5;
-  border: 1px solid #24283b;
+  background-color: $base00;
+  color: $base05;
+  border: 1px solid $base01;
   padding: 5px;
   border-radius: 4px;
 }
 
 .calendar:selected {
-  background-color: #7aa2f7;
-  color: #1a1b26;
+  background-color: $accent4;
+  color: $base00;
 }
 
 
 .powermenu-reveal {
-  background-color: #1a1b26;
+  background-color: $base00;
   padding: 0 4px;
-  border: 1px solid #414868;
+  border: 1px solid $base03;
   border-radius: 9px;
 }
 
-.btn-power { color: #f7768e; }
-.btn-reboot { color: #e0af68; }
-.btn-lock { color: #bb9af7; }
-.btn-quit { color: #7aa2f7; }
+.btn-power { color: $accent1; }
+.btn-reboot { color: $accent3; }
+.btn-lock { color: $accent5; }
+.btn-quit { color: $accent4; }

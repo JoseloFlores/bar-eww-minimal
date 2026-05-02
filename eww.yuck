@@ -1,4 +1,5 @@
 (defvar show_calendar false)
+(defpoll theme_watcher :interval "5s" "~/.config/eww/scripts/apply_theme.sh")
 (defpoll updates_count :interval "15m" "~/.config/eww/scripts/check_updates.sh")
 (defpoll clock_time :interval "1s" "date +'%H:%M'")
 (defpoll clock_date :interval "60s" "date +'%d/%m'")

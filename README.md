@@ -31,9 +31,36 @@ Si prefieres instalar las piezas por separado, asegúrate de tener:
 
 ## 📂 Estructura del Proyecto
 - `eww.yuck`: Estructura y widgets.
-- `eww.scss`: Estilos visuales (Tokio Night theme).
-- `scripts/`: Lógica para cada componente.
-- `install.sh`: Script de automatización.
+- `eww.scss`: Estilos visuales dinámicos.
+- `themes/`: Colección de esquemas de colores (Catppuccin, Nord, etc.).
+- `scripts/`: Lógica para cada componente y cambio de temas.
+
+## 🎨 Temas Dinámicos
+
+La barra soporta cambio de temas en caliente. Tienes varias formas de cambiar el aspecto visual:
+
+### 1. Manualmente (SCSS)
+Abre `eww.scss` y cambia la primera línea:
+```scss
+@import "themes/tokyonight.scss"; // Cambia por nord, dracula, rosepine, etc.
+```
+Al guardar, la barra se actualizará instantáneamente.
+
+### 2. Mediante Script
+Puedes usar el script incluido para cambiar el tema desde la terminal:
+```bash
+~/.config/eww/scripts/apply_theme.sh catppuccin
+```
+
+### 3. Variable de Entorno
+Si defines `EWW_THEME` en tu configuración, la barra puede detectarlo automáticamente:
+```bash
+export EWW_THEME=everforest
+~/.config/eww/scripts/apply_theme.sh
+```
+
+### Temas Disponibles:
+`catppuccin`, `dracula`, `everforest`, `gruvbox-dark`, `gruvbox-light`, `nord`, `rosepine`, `tokyonight`.
 
 ## ⌨️ Uso
 Para iniciar la barra:
