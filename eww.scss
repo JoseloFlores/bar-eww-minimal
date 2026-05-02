@@ -1,13 +1,13 @@
 * {
   all: unset;
   font-family: "MesloLGS Nerd Font", "Symbols Nerd Font", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .bar {
   background-color: #1a1b26;
   color: #c0caf5;
-  padding: 0 2px;
+  padding: 0 1px;
 }
 
 .workspaces button {
@@ -21,17 +21,23 @@
   color: #7aa2f7;
 }
 
-.network, .bluetooth, .volume, .brightness, .battery, .updates-none, .updates-pending, .clock, .powermenu {
+.network, .bluetooth, .volume, .brightness, .battery, .updates-none, .updates-pending, .clock, .powermenu-container {
   padding: 0 9px;
-  margin: 9 9px;
+  margin: 2 9px;
   transition: background-color 0.2s;
 }
 
-.network:hover, .bluetooth:hover, .volume:hover, .brightness:hover, .battery:hover, .updates-none:hover, .updates-pending:hover, .clock:hover, .powermenu:hover {
+.network:hover, .bluetooth:hover, .volume:hover, .brightness:hover, .battery:hover, .updates-none:hover, .updates-pending:hover, .clock:hover, .powermenu-container:hover {
   background-color: #24283b;
-  border-radius: 12px;
+  border-radius: 10px;
   margin: 0 4px;
 }
+
+.btn-reboot, .btn-lock, .btn-quit, .btn-power, .btn-toggle {
+  padding: 0 4px;
+}
+
+.btn-toggle { color: #a9b1d6; }
 
 .network { color: #7dcfff; }
 .bluetooth { color: #7aa2f7; }

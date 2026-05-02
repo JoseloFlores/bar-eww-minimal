@@ -1,22 +1,50 @@
-# Documentación de Eww Bar para Hyprland
+# Eww Bar para Hyprland (Debian)
 
-Esta documentación detalla la estructura y configuración de la barra Eww optimizada para Hyprland en Debian 13.
+Una barra minimalista y funcional construida con [Eww](https://elkowar.github.io/eww/), optimizada para Debian 13 y Hyprland.
 
-## Estructura de Directorios
-- `/home/jose/.config/eww/`: Contiene los archivos principales de Eww (`eww.yuck`, `eww.scss`) y scripts auxiliares.
-- `/home/jose/.config/hypr/`: Contiene scripts de soporte (`check_updates_count.sh`, `workspaces.sh`, `bluetooth.sh`).
+![Eww Bar Preview](https://via.placeholder.com/800x30?text=Eww+Bar+Preview)
 
-## Archivos Principales
-- `eww.yuck`: Define la estructura, widgets y lógica de la barra.
-- `eww.scss`: Define el estilo visual, incluyendo colores, fuentes y estados de interacción (hover).
+## ✨ Características
+- 🚀 **Workspaces**: Gestión de escritorios en tiempo real con Hyprland.
+- 📦 **Actualizaciones**: Indicador de paquetes pendientes (`apt`).
+- 📶 **Red y Bluetooth**: Estado de conexión y accesos rápidos.
+- 🔊 **Audio y Brillo**: Control mediante scroll y detección de dispositivos.
+- 🔋 **Batería**: Estado y capacidad con iconos dinámicos.
+- 📅 **Calendario**: Ventana emergente interactiva.
+- ⏻ **Power Menu**: Reinicio, bloqueo, salida y apagado con confirmación.
 
-## Scripts Auxiliares
-- `check_updates_count.sh`: Retorna el conteo de actualizaciones pendientes desde `apt`.
-- `workspaces.sh`: Escucha eventos de Hyprland vía socket para actualizar los escritorios en tiempo real.
-- `bluetooth.sh`: Detecta y retorna el nombre del dispositivo Bluetooth conectado.
-- `volume_get.sh`: Obtiene el volumen actual y detecta dinámicamente el dispositivo activo para mostrar el icono de audífonos o altavoces.
+## 🚀 Instalación Rápida
 
-## Notas de Mantenimiento
-- Para recargar la barra después de cualquier cambio:
-  `eww kill && eww open bar`
-- Los estilos visuales se encuentran en `eww.scss`. La familia tipográfica prioriza "MesloLGS Nerd Font".
+Para instalar todas las dependencias y configurar la barra automáticamente, ejecuta el siguiente comando:
+
+```bash
+git clone https://github.com/JoseloFlores/bar-eww-minimal /tmp/eww-bar && cd /tmp/eww-bar && chmod +x install.sh && ./install.sh
+```
+
+*(Nota: Sustituye la URL por la de tu repositorio)*
+
+## 🛠️ Requisitos Manuales
+Si prefieres instalar las piezas por separado, asegúrate de tener:
+- **Eww**: El motor de la barra.
+- **Fuentes**: `MesloLGS Nerd Font` (incluida en el script).
+- **Herramientas**: `jq`, `socat`, `wireplumber`, `brightnessctl`, `network-manager`, `zenity`.
+
+## 📂 Estructura del Proyecto
+- `eww.yuck`: Estructura y widgets.
+- `eww.scss`: Estilos visuales (Tokio Night theme).
+- `scripts/`: Lógica para cada componente.
+- `install.sh`: Script de automatización.
+
+## ⌨️ Uso
+Para iniciar la barra:
+```bash
+eww daemon && eww open bar
+```
+
+Para recargar cambios:
+```bash
+eww reload
+```
+
+---
+*Hecho para Hyprland en Debian.*
