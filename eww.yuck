@@ -9,11 +9,14 @@
 (deflisten workspaces :initial "[]" "~/.config/eww/scripts/workspaces.sh")
 
 (defwidget workspace_widget []
-  (box :class "workspaces" :orientation "h" :spacing 2
+  (box :class "workspaces" :orientation "h" :spacing 5
     (for ws in workspaces
-      (button :class {ws.id == 1 ? "active" : "default"}
+      (button :class {ws.active ? "active" : "default"}
               :onclick "hyprctl dispatch workspace ${ws.id}"
-              (label :text {ws.id})))))
+        (box :orientation "h" :spacing 5
+          (label :text {arraylength(ws.icons) == 0 ? "" : ""} :visible {arraylength(ws.icons) == 0})
+          (for icon in {ws.icons}
+            (label :text icon)))))))
 
 (defwidget updates_widget []
   (eventbox :class {updates_count > 0 ? "updates-pending" : "updates-none"}
@@ -68,21 +71,6 @@
         (button :class "btn-quit" :onclick "~/.config/eww/scripts/confirm_power.sh '¿Salir?' 'hyprctl dispatch exit'" "󰗼")))
     (button :class "btn-toggle" :onclick "${EWW_CMD} update show_powermenu=${show_powermenu ? false : true}" "󰅁")))
 
-
-(defwidget bar []
-  (box :class "bar" :orientation "h" :space-evenly false :spacing 0
-    (box :class "left" :orientation "h" :halign "start" :spacing 0
-      (workspace_widget))
-    (box :hexpand true)
-    (box :class "right" :orientation "h" :halign "end" :spacing 0
-      (updates_widget)
-      (network_widget)
-      (bluetooth_widget)
-      (volume_widget)
-      (brightness_widget)
-      (battery_widget)
-      (clock_widget)
-      (powermenu_widget))))
 
 
 (defpoll brightness :interval "0.1s" "~/.config/eww/scripts/brightness_get.sh")
