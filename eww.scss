@@ -11,7 +11,12 @@
 //   - everforest
 //   - gruvbox-dark
 //   - gruvbox-light
+//   - kanagawa-wave
+//   - kanagawa-dragon
+//   - kanagawa-lotus
 //   - nord
+//   - oxocarbon-dark
+//   - oxocarbon-light
 //   - rosepine
 //   - tokyonight
 
@@ -39,19 +44,19 @@
 }
 
 .network, .bluetooth, .volume, .brightness, .battery, .updates-none, .updates-pending, .clock, .powermenu-container {
-  padding: 0 9px;
-  margin: 2 9px;
-  transition: background-color 0.2s;
+  padding: 0 7px;
+  margin: 1 7px;
+  transition: background-color 0.1s;
 }
 
 .network:hover, .bluetooth:hover, .volume:hover, .brightness:hover, .battery:hover, .updates-none:hover, .updates-pending:hover, .clock:hover, .powermenu-container:hover {
   background-color: $base01;
-  border-radius: 10px;
+  border-radius: 12px;
   margin: 0 4px;
 }
 
 .btn-reboot, .btn-lock, .btn-quit, .btn-power, .btn-toggle {
-  padding: 0 4px;
+  padding: 0 2px;
 }
 
 .btn-toggle { color: $base04; }
