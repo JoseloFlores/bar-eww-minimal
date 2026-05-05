@@ -131,11 +131,38 @@
         (label :class "sys-detail-text" :text "RAM: ${sys_ram}")
         (label :class "sys-detail-text" :text "Disk: ${sys_disk}")))))
 
+(defpoll music :interval "1s" "~/.config/eww/scripts/music_info.sh")
+
+(defwidget music_bar []
+  (box :halign "center"
+    (eventbox :onclick "eww open --toggle music_win"
+              :class "music-bar-container"
+              :visible {music.status != "Stopped"}
+      (box :class "music-bar" :orientation "h" :space-evenly false :spacing 10
+        (label :text {music.icon} :class {music.class})
+        (label :text "${music.title} - ${music.artist}" :limit-width 35)))))
+
+(defwidget music_popup []
+  (box :class "music-popup" :orientation "v" :space-evenly false :spacing 15
+    (box :class "music-info" :orientation "h" :space-evenly false :spacing 15
+      (box :class "music-art" 
+           :style "background-image: url('${music.art}');"
+           :visible {music.art != ""})
+      (box :orientation "v" :space-evenly false :valign "center"
+        (label :class "music-title" :text {music.title} :limit-width 25 :halign "start")
+        (label :class "music-artist" :text {music.artist} :limit-width 25 :halign "start")))
+    
+    (box :class "music-controls" :orientation "h" :halign "center" :spacing 20
+      (button :class "music-btn" :onclick "playerctl -p ${music.player} previous" "󰒮")
+      (button :class "music-btn-play" :onclick "playerctl -p ${music.player} play-pause" {music.icon})
+      (button :class "music-btn" :onclick "playerctl -p ${music.player} next" "󰒭"))))
+
 (defwidget bar []
-  (box :class "bar" :orientation "h" :space-evenly false :spacing 4
+  (centerbox :class "bar"
     (box :class "left" :orientation "h" :halign "start" :space-evenly false :spacing 4
       (workspace_widget))
-    (box :hexpand true)
+    (box :class "center" :orientation "h" :halign "center" :space-evenly false
+      (music_bar))
     (box :class "right" :orientation "h" :halign "end" :space-evenly false :spacing 4
       (network_widget)
       (bluetooth_widget)
@@ -145,6 +172,11 @@
       (clock_widget)
       (updates_widget)
       (powermenu_widget))))
+
+(defwindow music_win
+  :monitor 0
+  :geometry (geometry :x "0" :y "35px" :width "300px" :height "120px" :anchor "top center")
+  (music_popup))
 
 (defwindow bar
   :monitor 0

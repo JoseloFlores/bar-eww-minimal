@@ -6,6 +6,7 @@ Una barra minimalista y funcional construida con [Eww](https://elkowar.github.io
 
 ## ✨ Características
 - 🚀 **Workspaces**: Gestión de escritorios en tiempo real con Hyprland.
+- 🎵 **Música (Universal)**: Widget central con información del reproductor activo (Spotify, VLC, Navegador) y popup de controles detallado.
 - 📦 **Actualizaciones**: Indicador de paquetes pendientes (`apt`).
 - 📶 **Red y Bluetooth**: Estado de conexión y accesos rápidos.
 - 🔊 **Audio y Brillo**: Control mediante scroll y detección de dispositivos.
@@ -27,7 +28,7 @@ git clone https://github.com/JoseloFlores/bar-eww-minimal /tmp/eww-bar && cd /tm
 Si prefieres instalar las piezas por separado, asegúrate de tener:
 - **Eww**: El motor de la barra.
 - **Fuentes**: `MesloLGS Nerd Font` (incluida en el script).
-- **Herramientas**: `jq`, `socat`, `wireplumber`, `brightnessctl`, `network-manager`, `zenity`.
+- **Herramientas**: `jq`, `socat`, `wireplumber`, `brightnessctl`, `network-manager`, `zenity`, `playerctl`.
 
 ## 📂 Estructura del Proyecto
 - `eww.yuck`: Estructura y widgets.
@@ -61,6 +62,12 @@ export EWW_THEME=everforest
 
 ### Temas Disponibles:
 `catppuccin`, `dracula`, `everforest`, `gruvbox-dark`, `gruvbox-light`, `nord`, `rosepine`, `tokyonight`.
+
+## 🎵 Widget de Música
+El widget de música es inteligente y universal:
+- **Soporte Universal**: Funciona con cualquier reproductor compatible con MPRIS (Spotify, VLC, Navegador, etc.).
+- **Prioridad de Foco**: Si tienes múltiples reproductores abiertos, el widget prioriza automáticamente el que tenga el foco de la ventana actual.
+- **Diseño Combinado**: Muestra información básica en el centro de la barra y un popup con controles detallados al hacer clic.
 
 ## ⌨️ Uso
 Para iniciar la barra:

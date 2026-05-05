@@ -177,7 +177,66 @@
   font-size: 16px;
 }
 
-.sys-detail-text {
-  font-size: 11px;
+.music-bar-container {
+  padding: 0 10px;
+  margin: 1 5px;
+  border-radius: 12px;
+  transition: background-color 0.1s;
+}
+
+.music-bar-container:hover {
+  background-color: $base01;
+}
+
+.music-playing { color: $accent3; }
+.music-paused { color: $base04; }
+
+.music-popup {
+  background-color: $base00;
+  color: $base05;
+  border: 1px solid $base01;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.music-art {
+  background-size: cover;
+  background-position: center;
+  min-width: 80px;
+  min-height: 80px;
+  border-radius: 8px;
+  background-color: $base02;
+}
+
+.music-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: $accent4;
+}
+
+.music-artist {
+  font-size: 13px;
   color: $base04;
+}
+
+.music-controls {
+  margin-top: 5px;
+}
+
+.music-btn, .music-btn-play {
+  font-size: 24px;
+  color: $base05;
+  padding: 5px 15px;
+  border-radius: 8px;
+  transition: all 0.1s;
+}
+
+.music-btn:hover, .music-btn-play:hover {
+  background-color: $base01;
+  color: $accent3;
+}
+
+.music-btn-play {
+  color: $accent3;
+  font-size: 28px;
 }
