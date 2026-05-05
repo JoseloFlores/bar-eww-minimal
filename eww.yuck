@@ -49,7 +49,7 @@
   (eventbox :class "network"
             :tooltip "WiFi: ${wifi}"
             :onclick "adwaita-network &"
-    (label :text " ${wifi}")))
+    (label :text {wifi == "Desconectado" ? "󰖪" : ""})))
 
 (defwidget bluetooth_widget []
   (eventbox :class "bluetooth"
@@ -79,7 +79,7 @@
   (eventbox :class "brightness"
             :tooltip "Brightness: ${brightness}%"
             :onscroll "~/.config/eww/scripts/brightness_control.sh {}"
-    (label :text "󰃠 ${brightness}%")))
+    (label :text {brightness < 33 ? "󰃞" : brightness < 67 ? "󰃟" : "󰃠"})))
 
 ;; System Info Desktop Widget
 (defpoll sys_host :interval "24h" "~/.config/eww/scripts/sys_info host")
@@ -131,6 +131,57 @@
         (label :class "sys-detail-text" :text "RAM: ${sys_ram}")
         (label :class "sys-detail-text" :text "Disk: ${sys_disk}")))))
 
+(defpoll weather_temp :interval "1h" "~/.config/eww/scripts/weather.sh temp")
+(defpoll weather_icon :interval "1h" "~/.config/eww/scripts/weather.sh icon")
+(defpoll fetch_os :interval "24h" "~/.config/eww/scripts/fetch_info.sh os")
+(defpoll fetch_kernel :interval "24h" "~/.config/eww/scripts/fetch_info.sh kernel")
+(defpoll fetch_pkgs :interval "1h" "~/.config/eww/scripts/fetch_info.sh pkgs")
+(defpoll fetch_uptime :interval "1m" "~/.config/eww/scripts/fetch_info.sh uptime")
+
+(defvar sidebar_reveal false)
+
+(defwidget sidebar_widget []
+  (box :class "sidebar-container" :orientation "v" :space-evenly false :spacing 20
+    ;; 1. Fetch Section
+    (box :class "sidebar-fetch" :orientation "h" :space-evenly false :spacing 15
+      (label :text "" :class "sidebar-distro-icon")
+      (box :orientation "v" :space-evenly false :valign "center"
+        (label :text fetch_os :class "sidebar-fetch-title" :halign "start")
+        (label :text "󰌽 ${fetch_kernel}" :class "sidebar-fetch-text" :halign "start")
+        (label :text "󰏖 ${fetch_pkgs} pkgs" :class "sidebar-fetch-text" :halign "start")
+        (label :text "󱎫 ${fetch_uptime}" :class "sidebar-fetch-text" :halign "start")))
+
+    ;; 2. App Launcher Grid
+    (box :class "sidebar-apps" :orientation "v" :spacing 10
+      (box :orientation "h" :spacing 10
+        (button :class "app-btn" :onclick "google-chrome-stable &" "")
+        (button :class "app-btn" :onclick "foot &" "󰞷")
+        (button :class "app-btn" :onclick "nautilus &" "󰉋"))
+      (box :orientation "h" :spacing 10
+        (button :class "app-btn" :onclick "code &" "󰨞")
+        (button :class "app-btn" :onclick "spotify &" "󰓇")
+        (button :class "app-btn" :onclick "steam &" "󰓓")))
+
+    ;; 3. Weather & Stats
+    (box :class "sidebar-bottom" :orientation "v" :space-evenly false :spacing 15
+      (box :class "sidebar-weather" :orientation "h" :space-evenly false :spacing 15
+        (label :text weather_icon :class "weather-icon")
+        (label :text weather_temp :class "weather-temp"))
+      (box :class "sidebar-sys-vertical" :orientation "v" :spacing 10
+        (sys_circle :value sys_cpu :icon "" :label "CPU" :class "cpu-circle")
+        (sys_circle :value sys_ram_perc :icon "󰍛" :label "RAM" :class "ram-circle")
+        (sys_circle :value sys_disk_perc :icon "󰋊" :label "Disk" :class "disk-circle")))))
+
+(defwindow sidebar
+  :monitor 0
+  :geometry (geometry :x "12px" :y "0%" :width "240px" :height "90%" :anchor "left center")
+  :stacking "bg"
+  :class "sidebar-window"
+  :exclusive false
+  :focusable false
+  :namespace "eww_sidebar"
+  (sidebar_widget))
+
 (defpoll music :interval "1s" "~/.config/eww/scripts/music_info.sh")
 
 (defwidget music_bar []
@@ -157,9 +208,16 @@
       (button :class "music-btn-play" :onclick "playerctl -p ${music.player} play-pause" {music.icon})
       (button :class "music-btn" :onclick "playerctl -p ${music.player} next" "󰒭"))))
 
+(defwidget sidebar_toggle []
+  (eventbox :class "sidebar-toggle"
+            :tooltip "Alternar Sidebar"
+            :onclick "eww open --toggle sidebar"
+    (label :text "󰍜")))
+
 (defwidget bar []
   (centerbox :class "bar"
     (box :class "left" :orientation "h" :halign "start" :space-evenly false :spacing 4
+      (sidebar_toggle)
       (workspace_widget))
     (box :class "center" :orientation "h" :halign "center" :space-evenly false
       (music_bar))
@@ -180,7 +238,7 @@
 
 (defwindow bar
   :monitor 0
-  :geometry (geometry :x "0%" :y "0%" :width "100%" :height "2px" :anchor "top center")
+  :geometry (geometry :x "0%" :y "0%" :width "100%" :height "35px" :anchor "top center")
   :stacking "fg"
   :exclusive true
   (bar))
@@ -190,10 +248,10 @@
   :geometry (geometry :x "0" :y "35px" :width "250px" :height "200px" :anchor "top right")
   (calendar :class "calendar"))
 
-(defwindow desktop_info
-  :monitor 0
-  :geometry (geometry :x "20px" :y "0%" :anchor "center right")
-  :stacking "bg"
-  :class "sys-win"
-  :focusable false
-  (system_info_widget))
+;; (defwindow desktop_info
+;;   :monitor 0
+;;   :geometry (geometry :x "20px" :y "0%" :anchor "center right")
+;;   :stacking "bg"
+;;   :class "sys-win"
+;;   :focusable false
+;;   (system_info_widget))

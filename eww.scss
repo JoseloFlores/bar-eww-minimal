@@ -26,6 +26,18 @@
   font-size: 13px;
 }
 
+.sidebar-toggle {
+  color: $accent4;
+  font-size: 18px;
+  padding: 0 10px;
+  margin-right: 5px;
+}
+
+.sidebar-toggle:hover {
+  background-color: $base01;
+  border-radius: 12px;
+}
+
 .bar {
   background-color: $base00;
   color: $base05;
@@ -175,6 +187,100 @@
 .sys-icon-temp {
   color: $accent3;
   font-size: 16px;
+}
+
+.sidebar-window {
+  background-color: transparent;
+}
+
+.sidebar-container {
+  background-color: rgba(26, 27, 38, 0.65);
+  border: 1px solid rgba(192, 202, 245, 0.15);
+  border-radius: 24px;
+  padding: 25px 12px;
+  color: #c0caf5;
+}
+
+.sidebar-fetch {
+  background-color: rgba(22, 22, 30, 0.5);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(65, 72, 104, 0.3);
+}
+
+.sidebar-distro-icon {
+  font-size: 40px;
+  color: #7aa2f7;
+}
+
+.sidebar-fetch-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #7aa2f7;
+}
+
+.sidebar-apps {
+  margin: 15px 0;
+}
+
+.app-btn {
+  background-color: rgba(22, 22, 30, 0.5);
+  font-size: 22px;
+  padding: 12px;
+  border-radius: 12px;
+  color: #c0caf5;
+  border: 1px solid rgba(65, 72, 104, 0.3);
+  margin: 2px;
+}
+
+.app-btn:hover {
+  background-color: #7aa2f7;
+  color: #1a1b26;
+}
+
+.sidebar-weather {
+  background-color: #16161e;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #414868;
+}
+
+.weather-icon {
+  font-size: 32px;
+  color: #bb9af7;
+}
+
+.sidebar-sys-vertical .sys-circle {
+  min-height: 50px;
+  min-width: 50px;
+}
+
+.app-btn:hover {
+  background-color: #7aa2f7;
+  color: #1a1b26;
+}
+
+.sidebar-bottom {
+  margin-top: 10px;
+}
+
+.sidebar-weather {
+  background-color: #24283b;
+  padding: 15px;
+  border-radius: 18px;
+  margin-right: 10px;
+  border: 1px solid #414868;
+}
+
+.weather-icon {
+  font-size: 44px;
+  color: #bb9af7;
+}
+
+.weather-temp {
+  font-size: 18px;
+  font-weight: bold;
+  color: #c0caf5;
 }
 
 .music-bar-container {
