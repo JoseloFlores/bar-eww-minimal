@@ -194,5 +194,6 @@
   :monitor 0
   :geometry (geometry :x "20px" :y "0%" :anchor "center right")
   :stacking "bg"
+  :class "sys-win"
   :focusable false
   (system_info_widget))

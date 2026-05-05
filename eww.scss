@@ -97,12 +97,12 @@
 .btn-quit { color: $accent4; }
 
 /* System Info Desktop Widget - Redesigned */
-.desktop_info {
-  background-color: rgba(0,0,0,0);
+.sys-win {
+  background-color: transparent;
 }
 
 .system-info-box {
-  background-color: rgba(26, 27, 38, 0.75); 
+  background-color: rgba(26, 27, 38, 0.3); 
   color: #c0caf5;
   padding: 25px;
   border-radius: 24px;
