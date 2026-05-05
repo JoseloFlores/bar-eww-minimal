@@ -95,3 +95,89 @@
 .btn-reboot { color: $accent3; }
 .btn-lock { color: $accent5; }
 .btn-quit { color: $accent4; }
+
+/* System Info Desktop Widget - Redesigned */
+.desktop_info {
+  background-color: rgba(0,0,0,0);
+}
+
+.system-info-box {
+  background-color: rgba(26, 27, 38, 0.75); 
+  color: #c0caf5;
+  padding: 25px;
+  border-radius: 24px;
+  border: 1px solid rgba(192, 202, 245, 0.1);
+}
+
+.sys-header-box {
+  border-bottom: 1px solid rgba(192, 202, 245, 0.1);
+  padding-bottom: 15px;
+  margin-bottom: 5px;
+}
+
+.sys-text-host {
+  font-size: 18px;
+  font-weight: bold;
+  color: $accent4;
+}
+
+.sys-text-uptime {
+  font-size: 12px;
+  color: $base04;
+}
+
+.sys-circle-box {
+  padding: 5px;
+}
+
+.sys-circle {
+  background-color: $base02;
+  min-height: 60px;
+  min-width: 60px;
+}
+
+.cpu-circle circular-progress { color: $accent1; }
+.ram-circle circular-progress { color: $accent2; }
+.disk-circle circular-progress { color: $accent6; }
+
+.sys-circle-icon {
+  font-size: 20px;
+}
+
+.sys-circle-label {
+  font-size: 11px;
+  font-weight: bold;
+  color: $base04;
+  margin-top: 5px;
+}
+
+.sys-circle-value {
+  font-size: 10px;
+  color: $base05;
+}
+
+.sys-details-box {
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(192, 202, 245, 0.1);
+}
+
+.sys-net-box {
+  margin-bottom: 10px;
+  background-color: rgba(22, 22, 30, 0.5);
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.net-icon-down { color: $accent4; }
+.net-icon-up { color: $accent1; }
+
+.sys-icon-temp {
+  color: $accent3;
+  font-size: 16px;
+}
+
+.sys-detail-text {
+  font-size: 11px;
+  color: $base04;
+}

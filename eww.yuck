@@ -81,6 +81,56 @@
             :onscroll "~/.config/eww/scripts/brightness_control.sh {}"
     (label :text "󰃠 ${brightness}%")))
 
+;; System Info Desktop Widget
+(defpoll sys_host :interval "24h" "~/.config/eww/scripts/sys_info host")
+(defpoll sys_uptime :interval "1m" "~/.config/eww/scripts/sys_info uptime")
+(defpoll sys_temp :interval "5s" "~/.config/eww/scripts/sys_info temp")
+(defpoll sys_cpu :interval "2s" "~/.config/eww/scripts/sys_info cpu")
+(defpoll sys_ram :interval "5s" "~/.config/eww/scripts/sys_info ram")
+(defpoll sys_ram_perc :interval "5s" "~/.config/eww/scripts/sys_info ram_perc")
+(defpoll sys_disk :interval "10m" "~/.config/eww/scripts/sys_info disk")
+(defpoll sys_disk_perc :interval "10m" "~/.config/eww/scripts/sys_info disk_perc")
+(defpoll net_down :interval "2s" "~/.config/eww/scripts/sys_info net_down")
+(defpoll net_up :interval "2s" "~/.config/eww/scripts/sys_info net_up")
+
+(defwidget sys_circle [value icon label class]
+  (box :orientation "v" :space-evenly false :spacing 5 :class "sys-circle-box"
+    (box :thickness 4 :class class
+      (circular-progress :value value :thickness 6 :start-at 75 :class "sys-circle"
+        (label :text icon :class "sys-circle-icon")))
+    (label :text label :class "sys-circle-label")
+    (label :text "${value}%" :class "sys-circle-value")))
+
+(defwidget system_info_widget []
+  (box :class "system-info-box" :orientation "v" :space-evenly false :spacing 20
+    ;; Header: Host & Uptime
+    (box :orientation "v" :space-evenly false :spacing 5 :class "sys-header-box"
+      (label :class "sys-text-host" :text "󰒋 ${sys_host}")
+      (label :class "sys-text-uptime" :text "up: ${sys_uptime}"))
+    
+    ;; Circles Row
+    (box :orientation "h" :space-evenly true :spacing 10
+      (sys_circle :value sys_cpu :icon "" :label "CPU" :class "cpu-circle")
+      (sys_circle :value sys_ram_perc :icon "󰍛" :label "RAM" :class "ram-circle")
+      (sys_circle :value sys_disk_perc :icon "󰋊" :label "Disk" :class "disk-circle"))
+    
+    ;; Footer: Detailed Info
+    (box :orientation "v" :space-evenly false :spacing 8 :class "sys-details-box"
+      (box :orientation "h" :space-evenly true :class "sys-net-box"
+        (box :orientation "h" :space-evenly false :spacing 5
+          (label :class "net-icon-down" :text "󰇚")
+          (label :text net_down))
+        (box :orientation "h" :space-evenly false :spacing 5
+          (label :class "net-icon-up" :text "󰕒")
+          (label :text net_up)))
+      
+      (box :orientation "h" :space-evenly false :spacing 10 :halign "center"
+        (label :class "sys-icon-temp" :text "")
+        (label :text sys_temp))
+      (box :orientation "h" :space-evenly true
+        (label :class "sys-detail-text" :text "RAM: ${sys_ram}")
+        (label :class "sys-detail-text" :text "Disk: ${sys_disk}")))))
+
 (defwidget bar []
   (box :class "bar" :orientation "h" :space-evenly false :spacing 4
     (box :class "left" :orientation "h" :halign "start" :space-evenly false :spacing 4
@@ -107,3 +157,10 @@
   :monitor 0
   :geometry (geometry :x "0" :y "35px" :width "250px" :height "200px" :anchor "top right")
   (calendar :class "calendar"))
+
+(defwindow desktop_info
+  :monitor 0
+  :geometry (geometry :x "20px" :y "0%" :anchor "center right")
+  :stacking "bg"
+  :focusable false
+  (system_info_widget))

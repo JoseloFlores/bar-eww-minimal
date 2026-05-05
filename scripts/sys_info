@@ -2,8 +2,8 @@
 
 ## CPU: Calcula a carga real (100% - Idle)
 get_cpu() {
-    # Usa o top para pegar o valor exato instantâneo
-    top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print int(100 - $1)}'
+    # Usando o comando 'top' de forma mais robusta para pegar a média global
+    top -bn2 -d 0.5 | grep "Cpu(s)" | tail -1 | awk '{print int(100 - $8)}'
 }
 
 ## RAM: Formato "4G/16G"
@@ -17,7 +17,72 @@ get_disk() {
     df -h / | awk 'NR==2 {print $3 "/" $2}'
 }
 
+## TEMPERATURA
+get_temp() {
+    if [ -f /sys/class/thermal/thermal_zone0/temp ]; then
+        temp=$(cat /sys/class/thermal/thermal_zone0/temp)
+        echo "$((temp / 1000))°C"
+    else
+        echo "N/A"
+    fi
+}
+
+## UPTIME
+get_uptime() {
+    uptime -p | sed 's/up //'
+}
+
+## HOSTNAME
+get_host() {
+    hostname
+}
+
+## RAM PERC: Just the percentage
+get_ram_perc() {
+    free | grep Mem | awk '{print int($3/$2 * 100.0)}'
+}
+
+## DISK PERC: Just the percentage
+get_disk_perc() {
+    df / | awk 'NR==2 {print int($5)}'
+}
+
+## NETWORK SPEEDS
+get_net() {
+    # Determina a interface ativa (ex: wlan0, enp3s0)
+    interface=$(ip route | grep default | awk '{print $5}' | head -n1)
+    if [ -z "$interface" ]; then echo "0B/s"; return; fi
+
+    # $1: "down" (byte 2) ou "up" (byte 10)
+    if [ "$1" == "net_down" ]; then col=2; else col=10; fi
+
+    # Primeira leitura
+    val1=$(grep "$interface" /proc/net/dev | awk -v c=$col '{print $c}')
+    sleep 0.8
+    # Segunda leitura
+    val2=$(grep "$interface" /proc/net/dev | awk -v c=$col '{print $c}')
+
+    diff=$((val2 - val1))
+
+    # Formatação legível
+    if [ $diff -lt 1024 ]; then
+        echo "${diff}B/s"
+    elif [ $diff -lt 1048576 ]; then
+        echo "$((diff / 1024))K/s"
+    else
+        # Usa awk para decimais se for MB
+        echo "$diff" | awk '{printf "%.1fM/s", $1/1048576}'
+    fi
+}
+
 # Executa a função baseada no argumento
 if [ "$1" == "cpu" ]; then get_cpu; fi
 if [ "$1" == "ram" ]; then get_ram; fi
+if [ "$1" == "ram_perc" ]; then get_ram_perc; fi
 if [ "$1" == "disk" ]; then get_disk; fi
+if [ "$1" == "disk_perc" ]; then get_disk_perc; fi
+if [ "$1" == "temp" ]; then get_temp; fi
+if [ "$1" == "uptime" ]; then get_uptime; fi
+if [ "$1" == "host" ]; then get_host; fi
+if [ "$1" == "net_down" ]; then get_net "net_down"; fi
+if [ "$1" == "net_up" ]; then get_net "net_up"; fi
