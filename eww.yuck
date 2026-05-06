@@ -96,7 +96,7 @@
 (defwidget sys_circle [value label class]
   (box :orientation "v" :space-evenly false :spacing 5 :class "sys-circle-box"
     (box :class class
-      (circular-progress :value value :thickness 14 :start-at 75 :class "sys-circle"
+      (circular-progress :value value :thickness 9 :start-at 75 :class "sys-circle"
         (box :orientation "v" :space-evenly false :valign "center" :halign "center" :class "sys-circle-content"
           (label :text "${round(value, 0)}%" :class "sys-circle-perc")
           (label :text label :class "sys-circle-label"))))))

@@ -130,20 +130,19 @@
 }
 
 circular-progress {
-  background-color: $base02;
+  background-color: transparent;
   border-radius: 50%;
   min-height: 120px;
   min-width: 120px;
 }
 
-/* Forzar que el circular progress sea un anillo */
 circular-progress trough {
-    background-color: $base02;
-    border-radius: 50%;
+  background-color: $base02;
+  border-radius: 50%;
 }
 
 circular-progress progress {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .cpu-circle circular-progress { color: $accent1; }
@@ -260,20 +259,20 @@ circular-progress progress {
 }
 
 .sidebar-sys-vertical {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .sidebar-sys-vertical circular-progress {
-  min-height: 210px;
-  min-width: 210px;
+  min-height: 90px;
+  min-width: 90px;
 }
 
 .sidebar-sys-vertical .sys-circle-perc {
-  font-size: 22px;
+  font-size: 16px;
 }
 
 .sidebar-sys-vertical .sys-circle-label {
-  font-size: 16px;
+  font-size: 11px;
 }
 
 /* Music Popup */
