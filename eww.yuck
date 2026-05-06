@@ -96,7 +96,7 @@
 (defwidget sys_circle [value icon label class]
   (box :orientation "v" :space-evenly false :spacing 5 :class "sys-circle-box"
     (box :thickness 3 :class class
-      (circular-progress :value value :thickness 4 :start-at 75 :class "sys-circle"
+      (circular-progress :value value :thickness 10 :start-at 75 :class "sys-circle"
         (label :text icon :class "sys-circle-icon")))
     (label :text label :class "sys-circle-label")
     (label :text "${value}%" :class "sys-circle-value")))
@@ -174,7 +174,7 @@
 
 (defwindow sidebar
   :monitor 0
-  :geometry (geometry :x "12px" :y "0%" :width "180px" :height "580px" :anchor "left center")
+  :geometry (geometry :x "12px" :y "0%" :width "220px" :height "750px" :anchor "left center")
   :stacking "bg"
   :class "sidebar-window"
   :exclusive false
