@@ -2,6 +2,8 @@
 CITY=""
 if [ "$1" == "temp" ]; then
     curl -s "wttr.in/${CITY}?format=%t" | sed 's/+//'
+elif [ "$1" == "city" ]; then
+    curl -s "ip-api.com/json" | grep -oP '"city":"\K[^"]+'
 elif [ "$1" == "icon" ]; then
     condition=$(curl -s "wttr.in/${CITY}?format=%C" | tr '[:upper:]' '[:lower:]')
     case "$condition" in

@@ -122,33 +122,43 @@
 }
 
 .sys-circle-box {
-  padding: 2px;
+  padding: 0px;
 }
 
 .sys-circle {
+  background-color: transparent;
+}
+
+circular-progress {
   background-color: $base02;
-  min-height: 70px;
-  min-width: 70px;
+  border-radius: 50%;
+  min-height: 120px;
+  min-width: 120px;
+}
+
+/* Forzar que el circular progress sea un anillo */
+circular-progress trough {
+    background-color: $base02;
+    border-radius: 50%;
+}
+
+circular-progress progress {
+    border-radius: 50%;
 }
 
 .cpu-circle circular-progress { color: $accent1; }
 .ram-circle circular-progress { color: $accent2; }
 .disk-circle circular-progress { color: $accent6; }
 
-.sys-circle-icon {
-  font-size: 28px;
+.sys-circle-perc {
+  font-size: 14px;
+  font-weight: bold;
+  color: $base05;
 }
 
 .sys-circle-label {
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 10px;
   color: $base04;
-  margin-top: 5px;
-}
-
-.sys-circle-value {
-  font-size: 12px;
-  color: $base05;
 }
 
 .sys-details-box {
@@ -181,7 +191,7 @@
   background-color: rgba(26, 27, 38, 0.2);
   border: 1px solid rgba(192, 202, 245, 0.1);
   border-radius: 20px;
-  padding: 15px 10px;
+  padding: 15px 5px;
   color: #c0caf5;
 }
 
@@ -228,25 +238,42 @@
 
 .sidebar-weather {
   background-color: rgba(22, 22, 30, 0.5);
-  padding: 20px;
+  padding: 15px;
   border-radius: 15px;
   border: 1px solid rgba(65, 72, 104, 0.3);
 }
 
 .weather-icon {
-  font-size: 48px;
+  font-size: 38px;
   color: $accent5;
 }
 
-.weather-temp {
-  font-size: 24px;
+.weather-city {
+  font-size: 14px;
   font-weight: bold;
+  color: $accent4;
+}
+
+.weather-temp {
+  font-size: 18px;
   color: #c0caf5;
 }
 
-.sidebar-sys-vertical .sys-circle {
-  min-height: 80px;
-  min-width: 80px;
+.sidebar-sys-vertical {
+  margin: 20px 0;
+}
+
+.sidebar-sys-vertical circular-progress {
+  min-height: 210px;
+  min-width: 210px;
+}
+
+.sidebar-sys-vertical .sys-circle-perc {
+  font-size: 22px;
+}
+
+.sidebar-sys-vertical .sys-circle-label {
+  font-size: 16px;
 }
 
 /* Music Popup */

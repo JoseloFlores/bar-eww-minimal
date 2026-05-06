@@ -93,13 +93,13 @@
 (defpoll net_down :interval "2s" "~/.config/eww/scripts/sys_info net_down")
 (defpoll net_up :interval "2s" "~/.config/eww/scripts/sys_info net_up")
 
-(defwidget sys_circle [value icon label class]
+(defwidget sys_circle [value label class]
   (box :orientation "v" :space-evenly false :spacing 5 :class "sys-circle-box"
-    (box :thickness 3 :class class
-      (circular-progress :value value :thickness 10 :start-at 75 :class "sys-circle"
-        (label :text icon :class "sys-circle-icon")))
-    (label :text label :class "sys-circle-label")
-    (label :text "${value}%" :class "sys-circle-value")))
+    (box :class class
+      (circular-progress :value value :thickness 14 :start-at 75 :class "sys-circle"
+        (box :orientation "v" :space-evenly false :valign "center" :halign "center" :class "sys-circle-content"
+          (label :text "${round(value, 0)}%" :class "sys-circle-perc")
+          (label :text label :class "sys-circle-label"))))))
 
 (defwidget system_info_widget []
   (box :class "system-info-box" :orientation "v" :space-evenly false :spacing 12
@@ -110,9 +110,9 @@
     
     ;; Circles Row
     (box :orientation "h" :space-evenly true :spacing 10
-      (sys_circle :value sys_cpu :icon "" :label "CPU" :class "cpu-circle")
-      (sys_circle :value sys_ram_perc :icon "󰍛" :label "RAM" :class "ram-circle")
-      (sys_circle :value sys_disk_perc :icon "󰋊" :label "Disk" :class "disk-circle"))
+      (sys_circle :value sys_cpu :label "CPU" :class "cpu-circle")
+      (sys_circle :value sys_ram_perc :label "RAM" :class "ram-circle")
+      (sys_circle :value sys_disk_perc :label "Disk" :class "disk-circle"))
     
     ;; Footer: Detailed Info
     (box :orientation "v" :space-evenly false :spacing 5 :class "sys-details-box"
@@ -132,6 +132,7 @@
         (label :class "sys-detail-text" :text "Disk: ${sys_disk}")))))
 
 (defpoll weather_temp :interval "1h" "~/.config/eww/scripts/weather.sh temp")
+(defpoll weather_city :interval "1h" "~/.config/eww/scripts/weather.sh city")
 (defpoll weather_icon :interval "1h" "~/.config/eww/scripts/weather.sh icon")
 (defpoll fetch_os :interval "24h" "~/.config/eww/scripts/fetch_info.sh os")
 (defpoll fetch_kernel :interval "24h" "~/.config/eww/scripts/fetch_info.sh kernel")
@@ -166,15 +167,17 @@
     (box :class "sidebar-bottom" :orientation "v" :space-evenly false :spacing 10
       (box :class "sidebar-weather" :orientation "h" :space-evenly false :spacing 15
         (label :text weather_icon :class "weather-icon")
-        (label :text weather_temp :class "weather-temp"))
-      (box :class "sidebar-sys-vertical" :orientation "v" :spacing 5
-        (sys_circle :value sys_cpu :icon "" :label "CPU" :class "cpu-circle")
-        (sys_circle :value sys_ram_perc :icon "󰍛" :label "RAM" :class "ram-circle")
-        (sys_circle :value sys_disk_perc :icon "󰋊" :label "Disk" :class "disk-circle")))))
+        (box :orientation "v" :space-evenly false :valign "center"
+          (label :text weather_city :class "weather-city" :halign "start")
+          (label :text weather_temp :class "weather-temp" :halign "start")))
+      (box :class "sidebar-sys-vertical" :orientation "v" :spacing 20 :vexpand true :space-evenly true
+        (sys_circle :value sys_cpu :label "CPU" :class "cpu-circle")
+        (sys_circle :value sys_ram_perc :label "RAM" :class "ram-circle")
+        (sys_circle :value sys_disk_perc :label "Disk" :class "disk-circle")))))
 
 (defwindow sidebar
   :monitor 0
-  :geometry (geometry :x "12px" :y "0%" :width "220px" :height "750px" :anchor "left center")
+  :geometry (geometry :x "12px" :y "0%" :width "250px" :height "650px" :anchor "left center")
   :stacking "bg"
   :class "sidebar-window"
   :exclusive false
