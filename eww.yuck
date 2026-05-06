@@ -32,7 +32,7 @@
 
 (defwidget battery_widget []
   (box :class "battery" 
-       :tooltip {EWW_BATTERY == "" ? "No Battery" : "${EWW_BATTERY.BAT1.status}: ${EWW_BATTERY.BAT1.capacity}%"}
+       :tooltip "Batería: ${battery}"
        (label :text "${battery}")))
 
 (defwidget volume_widget []
