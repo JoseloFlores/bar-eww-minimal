@@ -1,24 +1,8 @@
 // ==========================================
 // CAMBIA TU TEMA AQUÍ:
 // ==========================================
-// Simplemente cambia el nombre del archivo abajo (ej: nord, dracula, rosepine)
 @import "themes/tokyonight.scss";
 // ==========================================
-
-// Temas Disponibles 
-//   - catppuccin
-//   - dracula
-//   - everforest
-//   - gruvbox-dark
-//   - gruvbox-light
-//   - kanagawa-wave
-//   - kanagawa-dragon
-//   - kanagawa-lotus
-//   - nord
-//   - oxocarbon-dark
-//   - oxocarbon-light
-//   - rosepine
-//   - tokyonight
 
 * {
   all: unset;
@@ -95,7 +79,6 @@
   color: $base00;
 }
 
-
 .powermenu-reveal {
   background-color: $base00;
   padding: 0 4px;
@@ -108,44 +91,44 @@
 .btn-lock { color: $accent5; }
 .btn-quit { color: $accent4; }
 
-/* System Info Desktop Widget - Redesigned */
+/* System Info Desktop Widget */
 .sys-win {
   background-color: transparent;
 }
 
 .system-info-box {
-  background-color: rgba(26, 27, 38, 0.3); 
+  background-color: rgba(26, 27, 38, 0.1); 
   color: #c0caf5;
-  padding: 25px;
-  border-radius: 24px;
+  padding: 15px;
+  border-radius: 20px;
   border: 1px solid rgba(192, 202, 245, 0.1);
 }
 
 .sys-header-box {
   border-bottom: 1px solid rgba(192, 202, 245, 0.1);
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   margin-bottom: 5px;
 }
 
 .sys-text-host {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: $accent4;
 }
 
 .sys-text-uptime {
-  font-size: 12px;
+  font-size: 11px;
   color: $base04;
 }
 
 .sys-circle-box {
-  padding: 5px;
+  padding: 2px;
 }
 
 .sys-circle {
   background-color: $base02;
-  min-height: 60px;
-  min-width: 60px;
+  min-height: 50px;
+  min-width: 50px;
 }
 
 .cpu-circle circular-progress { color: $accent1; }
@@ -153,7 +136,7 @@
 .disk-circle circular-progress { color: $accent6; }
 
 .sys-circle-icon {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .sys-circle-label {
@@ -189,44 +172,45 @@
   font-size: 16px;
 }
 
+/* Sidebar Styling */
 .sidebar-window {
   background-color: transparent;
 }
 
 .sidebar-container {
-  background-color: rgba(26, 27, 38, 0.65);
-  border: 1px solid rgba(192, 202, 245, 0.15);
-  border-radius: 24px;
-  padding: 25px 12px;
+  background-color: rgba(26, 27, 38, 0.2);
+  border: 1px solid rgba(192, 202, 245, 0.1);
+  border-radius: 20px;
+  padding: 15px 10px;
   color: #c0caf5;
 }
 
 .sidebar-fetch {
   background-color: rgba(22, 22, 30, 0.5);
-  padding: 12px;
+  padding: 8px;
   border-radius: 12px;
   border: 1px solid rgba(65, 72, 104, 0.3);
 }
 
 .sidebar-distro-icon {
-  font-size: 40px;
+  font-size: 32px;
   color: #7aa2f7;
 }
 
 .sidebar-fetch-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   color: #7aa2f7;
 }
 
 .sidebar-apps {
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 .app-btn {
   background-color: rgba(22, 22, 30, 0.5);
-  font-size: 22px;
-  padding: 12px;
+  font-size: 18px;
+  padding: 8px;
   border-radius: 12px;
   color: #c0caf5;
   border: 1px solid rgba(65, 72, 104, 0.3);
@@ -234,29 +218,7 @@
 }
 
 .app-btn:hover {
-  background-color: #7aa2f7;
-  color: #1a1b26;
-}
-
-.sidebar-weather {
-  background-color: #16161e;
-  padding: 15px;
-  border-radius: 12px;
-  border: 1px solid #414868;
-}
-
-.weather-icon {
-  font-size: 32px;
-  color: #bb9af7;
-}
-
-.sidebar-sys-vertical .sys-circle {
-  min-height: 50px;
-  min-width: 50px;
-}
-
-.app-btn:hover {
-  background-color: #7aa2f7;
+  background-color: $accent4;
   color: #1a1b26;
 }
 
@@ -265,16 +227,15 @@
 }
 
 .sidebar-weather {
-  background-color: #24283b;
+  background-color: rgba(22, 22, 30, 0.5);
   padding: 15px;
-  border-radius: 18px;
-  margin-right: 10px;
-  border: 1px solid #414868;
+  border-radius: 12px;
+  border: 1px solid rgba(65, 72, 104, 0.3);
 }
 
 .weather-icon {
-  font-size: 44px;
-  color: #bb9af7;
+  font-size: 32px;
+  color: $accent5;
 }
 
 .weather-temp {
@@ -283,6 +244,12 @@
   color: #c0caf5;
 }
 
+.sidebar-sys-vertical .sys-circle {
+  min-height: 45px;
+  min-width: 45px;
+}
+
+/* Music Popup */
 .music-bar-container {
   padding: 0 10px;
   margin: 1 5px;

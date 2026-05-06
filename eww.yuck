@@ -95,14 +95,14 @@
 
 (defwidget sys_circle [value icon label class]
   (box :orientation "v" :space-evenly false :spacing 5 :class "sys-circle-box"
-    (box :thickness 4 :class class
-      (circular-progress :value value :thickness 6 :start-at 75 :class "sys-circle"
+    (box :thickness 3 :class class
+      (circular-progress :value value :thickness 4 :start-at 75 :class "sys-circle"
         (label :text icon :class "sys-circle-icon")))
     (label :text label :class "sys-circle-label")
     (label :text "${value}%" :class "sys-circle-value")))
 
 (defwidget system_info_widget []
-  (box :class "system-info-box" :orientation "v" :space-evenly false :spacing 20
+  (box :class "system-info-box" :orientation "v" :space-evenly false :spacing 12
     ;; Header: Host & Uptime
     (box :orientation "v" :space-evenly false :spacing 5 :class "sys-header-box"
       (label :class "sys-text-host" :text "󰒋 ${sys_host}")
@@ -115,7 +115,7 @@
       (sys_circle :value sys_disk_perc :icon "󰋊" :label "Disk" :class "disk-circle"))
     
     ;; Footer: Detailed Info
-    (box :orientation "v" :space-evenly false :spacing 8 :class "sys-details-box"
+    (box :orientation "v" :space-evenly false :spacing 5 :class "sys-details-box"
       (box :orientation "h" :space-evenly true :class "sys-net-box"
         (box :orientation "h" :space-evenly false :spacing 5
           (label :class "net-icon-down" :text "󰇚")
@@ -141,7 +141,7 @@
 (defvar sidebar_reveal false)
 
 (defwidget sidebar_widget []
-  (box :class "sidebar-container" :orientation "v" :space-evenly false :spacing 20
+  (box :class "sidebar-container" :orientation "v" :space-evenly false :spacing 10
     ;; 1. Fetch Section
     (box :class "sidebar-fetch" :orientation "h" :space-evenly false :spacing 15
       (label :text "" :class "sidebar-distro-icon")
@@ -152,29 +152,29 @@
         (label :text "󱎫 ${fetch_uptime}" :class "sidebar-fetch-text" :halign "start")))
 
     ;; 2. App Launcher Grid
-    (box :class "sidebar-apps" :orientation "v" :spacing 10
-      (box :orientation "h" :spacing 10
+    (box :class "sidebar-apps" :orientation "v" :spacing 5
+      (box :orientation "h" :spacing 5
         (button :class "app-btn" :onclick "google-chrome-stable &" "")
         (button :class "app-btn" :onclick "foot &" "󰞷")
         (button :class "app-btn" :onclick "nautilus &" "󰉋"))
-      (box :orientation "h" :spacing 10
+      (box :orientation "h" :spacing 5
         (button :class "app-btn" :onclick "code &" "󰨞")
         (button :class "app-btn" :onclick "spotify &" "󰓇")
         (button :class "app-btn" :onclick "steam &" "󰓓")))
 
     ;; 3. Weather & Stats
-    (box :class "sidebar-bottom" :orientation "v" :space-evenly false :spacing 15
+    (box :class "sidebar-bottom" :orientation "v" :space-evenly false :spacing 10
       (box :class "sidebar-weather" :orientation "h" :space-evenly false :spacing 15
         (label :text weather_icon :class "weather-icon")
         (label :text weather_temp :class "weather-temp"))
-      (box :class "sidebar-sys-vertical" :orientation "v" :spacing 10
+      (box :class "sidebar-sys-vertical" :orientation "v" :spacing 5
         (sys_circle :value sys_cpu :icon "" :label "CPU" :class "cpu-circle")
         (sys_circle :value sys_ram_perc :icon "󰍛" :label "RAM" :class "ram-circle")
         (sys_circle :value sys_disk_perc :icon "󰋊" :label "Disk" :class "disk-circle")))))
 
 (defwindow sidebar
   :monitor 0
-  :geometry (geometry :x "12px" :y "0%" :width "240px" :height "90%" :anchor "left center")
+  :geometry (geometry :x "12px" :y "0%" :width "180px" :height "580px" :anchor "left center")
   :stacking "bg"
   :class "sidebar-window"
   :exclusive false
