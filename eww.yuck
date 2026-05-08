@@ -141,8 +141,16 @@
 
 (defvar sidebar_reveal false)
 
+(defwidget sys_progress [value icon class]
+  (box :orientation "h" :spacing 8 :class "sys-bar-box" :space-evenly false
+    (label :text icon :class "sys-icon ${class}")
+    (box :class "sys-bar" :orientation "h" :halign "start" :valign "center" :hexpand false
+      (box :class "sys-bar-fill ${class}-fill" :halign "start" :hexpand false
+           :style "min-width: ${round(value * 1.1, 0)}px;"))
+    (label :text "${round(value, 0)}%" :class "sys-perc" :hexpand true :halign "end")))
+
 (defwidget sidebar_widget []
-  (box :class "sidebar-container" :orientation "v" :space-evenly false :spacing 10
+  (box :class "sidebar-container" :orientation "v" :valign "center" :space-evenly false :spacing 10
     ;; 1. Fetch Section
     (box :class "sidebar-fetch" :orientation "h" :space-evenly false :spacing 15
       (label :text "" :class "sidebar-distro-icon")
@@ -170,14 +178,14 @@
         (box :orientation "v" :space-evenly false :valign "center"
           (label :text weather_city :class "weather-city" :halign "start")
           (label :text weather_temp :class "weather-temp" :halign "start")))
-      (box :class "sidebar-sys-vertical" :orientation "v" :spacing 20 :vexpand true :space-evenly true
-        (sys_circle :value sys_cpu :label "CPU" :class "cpu-circle")
-        (sys_circle :value sys_ram_perc :label "RAM" :class "ram-circle")
-        (sys_circle :value sys_disk_perc :label "Disk" :class "disk-circle")))))
+      (box :class "sidebar-sys-bars" :orientation "v" :spacing 12 :space-evenly false
+        (sys_progress :value sys_cpu :icon "" :class "cpu-bar")
+        (sys_progress :value sys_ram_perc :icon "󰍛" :class "ram-bar")
+        (sys_progress :value sys_disk_perc :icon "󰋊" :class "disk-bar")))))
 
 (defwindow sidebar
   :monitor 0
-  :geometry (geometry :x "12px" :y "0%" :width "250px" :height "950px" :anchor "left center")
+  :geometry (geometry :x "12px" :y "0%" :width "200px" :height "480px" :anchor "left center")
   :stacking "bg"
   :class "sidebar-window"
   :exclusive false
@@ -219,12 +227,12 @@
 
 (defwidget bar []
   (centerbox :class "bar"
-    (box :class "left" :orientation "h" :halign "start" :space-evenly false :spacing 4
+    (box :class "left" :orientation "h" :halign "start" :valign "center" :space-evenly false :spacing 4
       (sidebar_toggle)
       (workspace_widget))
-    (box :class "center" :orientation "h" :halign "center" :space-evenly false
+    (box :class "center" :orientation "h" :halign "center" :valign "center" :space-evenly false
       (music_bar))
-    (box :class "right" :orientation "h" :halign "end" :space-evenly false :spacing 4
+    (box :class "right" :orientation "h" :halign "end" :valign "center" :space-evenly false :spacing 4
       (network_widget)
       (bluetooth_widget)
       (volume_widget)
