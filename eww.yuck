@@ -185,7 +185,7 @@
 
 (defwindow sidebar
   :monitor 0
-  :geometry (geometry :x "12px" :y "0%" :width "200px" :height "480px" :anchor "left center")
+  :geometry (geometry :x "12px" :y "0%" :width "200px" :anchor "left center")
   :stacking "bg"
   :class "sidebar-window"
   :exclusive false
@@ -244,7 +244,9 @@
 
 (defwindow music_win
   :monitor 0
-  :geometry (geometry :x "0" :y "35px" :width "300px" :height "120px" :anchor "top center")
+  :geometry (geometry :x "0" :y "35px" :width "300px" :anchor "top center")
+  :namespace "eww_music"
+  :class "music-window"
   (music_popup))
 
 (defwindow bar
@@ -256,7 +258,9 @@
 
 (defwindow calendar_win
   :monitor 0
-  :geometry (geometry :x "0" :y "35px" :width "250px" :height "200px" :anchor "top right")
+  :geometry (geometry :x "0" :y "35px" :width "250px" :anchor "top right")
+  :namespace "eww_calendar"
+  :class "calendar-window"
   (calendar :class "calendar"))
 
 ;; (defwindow desktop_info
